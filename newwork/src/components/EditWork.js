@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import serialize from "form-serialize";
+import React from "react";
+import axios from "axios";
 
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -11,41 +11,70 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/lab";
 
-class AddWork extends React.Component {
+class EditWork extends React.Component {
   state = {
     Kategori_ID: "",
     Tarih: new Date(),
     iş_aktivite_ID: "",
     iş_Durum_ID: "",
-    konum: "",
+    Konum: "",
 
     iş_gün_sayısı: "",
   };
 
-  handleChangeKonum = (event) => {
-    this.setState({ konum: event.target.value });
-  };
+  iş_ID = this.props.match.params.id;
 
-  handleChangeişgünsayısı = (event) => {
-    this.setState({ iş_gün_sayısı: parseInt(event.target.value) });
-  };
-  handleChangekategori = (event) => {
-    this.setState({ Kategori_ID: event.target.value });
-  };
-  handleChangeaktivite = (event) => {
-    this.setState({ iş_aktivite_ID: event.target.value });
-  };
-  handleChangeOnay = (event) => {
-    this.setState({ iş_Durum_ID: event.target.value });
+  async componentDidMount() {
+    const response = await axios.get(
+      `https://localhost:44323/Tbl_G%C3%BCnl%C3%BCk_i%C5%9F/Details/${this.iş_ID}`
+    );
+    console.log(response.data);
+
+    const work = response.data;
+
+    this.setState({
+      Kategori_ID: work.Kategori_ID,
+      Tarih: work.Tarih,
+      iş_aktivite_ID: work.iş_aktivite_ID,
+      iş_Durum_ID: work.iş_Durum_ID,
+      Konum: work.Konum,
+
+      iş_gün_sayısı: work.iş_gün_sayısı,
+    });
+  }
+
+  onInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
   handleDateChange = (newDate) => {
     this.setState({ Tarih: newDate });
   };
-
   handleFormSubmit = (e) => {
     e.preventDefault();
-    // const newWork = serialize(e.target, { hash: true });
-    this.props.onAddWork(this.state);
+
+    const {
+      Kategori_ID,
+      Tarih,
+      Konum,
+
+      iş_aktivite_ID,
+      iş_Durum_ID,
+      iş_gün_sayısı,
+    } = this.state;
+
+    const updatedWork = {
+      Kategori_ID,
+      Tarih,
+      Konum,
+
+      iş_aktivite_ID,
+      iş_Durum_ID,
+      iş_gün_sayısı,
+    };
+    this.props.onEditWork(this.iş_ID, updatedWork);
+    this.props.history.push("/");
   };
 
   render() {
@@ -59,7 +88,7 @@ class AddWork extends React.Component {
               className="form-control"
               id="disabledInput"
               type="text"
-              placeholder="YENİ İŞ EKLEYİNİZ..."
+              placeholder="İŞ BİLGİLERİNİ GÜNCELLEYİNİZ.."
               disabled
             />
           </div>
@@ -71,8 +100,9 @@ class AddWork extends React.Component {
                 label="Kategori Seçiniz"
                 labelId="kategori-select"
                 id="kategori-select"
+                name="Kategori_ID"
                 value={this.state.Kategori_ID}
-                onChange={this.handleChangekategori}
+                onChange={this.onInputChange}
                 color="success"
               >
                 <MenuItem value={1} color="success">
@@ -103,7 +133,9 @@ class AddWork extends React.Component {
                 label="Konum"
                 variant="outlined"
                 color="success"
-                onChange={this.handleChangeKonum}
+                name="Konum"
+                onChange={this.onInputChange}
+                value={this.state.Konum}
               />
             </Box>
           </div>
@@ -118,7 +150,9 @@ class AddWork extends React.Component {
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={this.handleChangeişgünsayısı}
+              name="iş_gün_sayısı"
+              onChange={this.onInputChange}
+              value={this.state.iş_gün_sayısı}
             />
           </div>
           <div>
@@ -128,8 +162,9 @@ class AddWork extends React.Component {
                 label="Aktivite Durumu Seçiniz"
                 labelId="aktivite-select"
                 id="aktivite-select"
+                name="iş_aktivite_ID"
                 value={this.state.iş_aktivite_ID}
-                onChange={this.handleChangeaktivite}
+                onChange={this.onInputChange}
                 sx={{ width: 220, height: 53 }}
                 color="success"
               >
@@ -149,8 +184,9 @@ class AddWork extends React.Component {
                 label="Onay Durumu Seçiniz"
                 labelId="durum-select"
                 id="durum-select"
+                name="iş_Durum_ID"
                 value={this.state.iş_Durum_ID}
-                onChange={this.handleChangeOnay}
+                onChange={this.onInputChange}
                 sx={{ width: 220, height: 53 }}
               >
                 <MenuItem value={1}>Onaylandı</MenuItem>
@@ -180,7 +216,7 @@ class AddWork extends React.Component {
           </LocalizationProvider>
           <div>
             <button className="btn btn-danger btn-block" type="submit">
-              Add Work
+              İŞ BİLGİLERİNİ GÜNCELLE
             </button>
           </div>
         </form>
@@ -188,4 +224,4 @@ class AddWork extends React.Component {
     );
   }
 }
-export default AddWork;
+export default EditWork;
