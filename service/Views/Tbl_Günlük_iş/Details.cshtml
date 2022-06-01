@@ -1,0 +1,66 @@
+﻿@model NEWWORK.Tbl_Günlük_iş
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tbl_Günlük_iş</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Konum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Konum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iş_gün_sayısı)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iş_gün_sayısı)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_iş_aktivite.iş_aktivite_durumu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tbl_iş_aktivite.iş_aktivite_durumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_iş_Durumu.iş_onay_durumu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tbl_iş_Durumu.iş_onay_durumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbl_Kategori.Kategori_Adi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tbl_Kategori.Kategori_Adi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.iş_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

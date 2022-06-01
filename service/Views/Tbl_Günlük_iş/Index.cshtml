@@ -1,0 +1,63 @@
+﻿@model IEnumerable<NEWWORK.Tbl_Günlük_iş>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Konum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tarih)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iş_gün_sayısı)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tbl_iş_aktivite.iş_aktivite_durumu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tbl_iş_Durumu.iş_onay_durumu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tbl_Kategori.Kategori_Adi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Konum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarih)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iş_gün_sayısı)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tbl_iş_aktivite.iş_aktivite_durumu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tbl_iş_Durumu.iş_onay_durumu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tbl_Kategori.Kategori_Adi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.iş_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.iş_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.iş_ID })
+        </td>
+    </tr>
+}
+
+</table>

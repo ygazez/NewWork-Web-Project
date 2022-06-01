@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Proje1ModelStoreContainer" CdmEntityContainer="Proje1Entities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Proje1Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Günlük_iş">
+      <EntityTypeMapping TypeName="Proje1Model.Tbl_Günlük_iş">
+        <MappingFragment StoreEntitySet="Tbl_Günlük_iş">
+          <ScalarProperty Name="iş_ID" ColumnName="iş_ID" />
+          <ScalarProperty Name="Kategori_ID" ColumnName="Kategori_ID" />
+          <ScalarProperty Name="Konum" ColumnName="Konum" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="iş_gün_sayısı" ColumnName="iş_gün_sayısı" />
+          <ScalarProperty Name="iş_aktivite_ID" ColumnName="iş_aktivite_ID" />
+          <ScalarProperty Name="iş_Durum_ID" ColumnName="iş_Durum_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_iş_aktivite">
+      <EntityTypeMapping TypeName="Proje1Model.Tbl_iş_aktivite">
+        <MappingFragment StoreEntitySet="Tbl_iş_aktivite">
+          <ScalarProperty Name="iş_aktivite_ID" ColumnName="iş_aktivite_ID" />
+          <ScalarProperty Name="iş_aktivite_durumu" ColumnName="iş_aktivite_durumu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_iş_Durumu">
+      <EntityTypeMapping TypeName="Proje1Model.Tbl_iş_Durumu">
+        <MappingFragment StoreEntitySet="Tbl_iş_Durumu">
+          <ScalarProperty Name="iş_Durum_ID" ColumnName="iş_Durum_ID" />
+          <ScalarProperty Name="iş_onay_durumu" ColumnName="iş_onay_durumu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Kategori">
+      <EntityTypeMapping TypeName="Proje1Model.Tbl_Kategori">
+        <MappingFragment StoreEntitySet="Tbl_Kategori">
+          <ScalarProperty Name="Kategori_ID" ColumnName="Kategori_ID" />
+          <ScalarProperty Name="Kategori_Adi" ColumnName="Kategori_Adi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Kullanici">
+      <EntityTypeMapping TypeName="Proje1Model.Tbl_Kullanici">
+        <MappingFragment StoreEntitySet="Tbl_Kullanici">
+          <ScalarProperty Name="Kullanici_ID" ColumnName="Kullanici_ID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="şifre" ColumnName="şifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_iş_işlem">
+      <EntityTypeMapping TypeName="Proje1Model.Tbl_iş_işlem">
+        <MappingFragment StoreEntitySet="Tbl_iş_işlem">
+          <ScalarProperty Name="Kullanici_ID" ColumnName="Kullanici_ID" />
+          <ScalarProperty Name="iş_ID" ColumnName="iş_ID" />
+          <ScalarProperty Name="işlem" ColumnName="işlem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

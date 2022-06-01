@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Proje1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tbl_Günlük_iş">
+    <Key>
+      <PropertyRef Name="iş_ID" />
+    </Key>
+    <Property Name="iş_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kategori_ID" Type="int" Nullable="false" />
+    <Property Name="Konum" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" Nullable="false" />
+    <Property Name="iş_gün_sayısı" Type="int" Nullable="false" />
+    <Property Name="iş_aktivite_ID" Type="int" Nullable="false" />
+    <Property Name="iş_Durum_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tbl_iş_aktivite">
+    <Key>
+      <PropertyRef Name="iş_aktivite_ID" />
+    </Key>
+    <Property Name="iş_aktivite_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iş_aktivite_durumu" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tbl_iş_Durumu">
+    <Key>
+      <PropertyRef Name="iş_Durum_ID" />
+    </Key>
+    <Property Name="iş_Durum_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iş_onay_durumu" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Proje1.dbo.Tbl_iş_işlem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Tbl_iş_işlem">
+    <Key>
+      <PropertyRef Name="Kullanici_ID" />
+      <PropertyRef Name="iş_ID" />
+      <PropertyRef Name="işlem" />
+    </Key>
+    <Property Name="Kullanici_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iş_ID" Type="int" Nullable="false" />
+    <Property Name="işlem" Type="varchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tbl_Kategori">
+    <Key>
+      <PropertyRef Name="Kategori_ID" />
+    </Key>
+    <Property Name="Kategori_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kategori_Adi" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tbl_Kullanici">
+    <Key>
+      <PropertyRef Name="Kullanici_ID" />
+    </Key>
+    <Property Name="Kullanici_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Soyad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefon" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Mail" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="şifre" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Tbl_Günlük_iş_Tbl_iş_aktivite">
+    <End Role="Tbl_iş_aktivite" Type="Self.Tbl_iş_aktivite" Multiplicity="1" />
+    <End Role="Tbl_Günlük_iş" Type="Self.Tbl_Günlük_iş" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_iş_aktivite">
+        <PropertyRef Name="iş_aktivite_ID" />
+      </Principal>
+      <Dependent Role="Tbl_Günlük_iş">
+        <PropertyRef Name="iş_aktivite_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Günlük_iş_Tbl_iş_Durumu">
+    <End Role="Tbl_iş_Durumu" Type="Self.Tbl_iş_Durumu" Multiplicity="1" />
+    <End Role="Tbl_Günlük_iş" Type="Self.Tbl_Günlük_iş" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_iş_Durumu">
+        <PropertyRef Name="iş_Durum_ID" />
+      </Principal>
+      <Dependent Role="Tbl_Günlük_iş">
+        <PropertyRef Name="iş_Durum_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Günlük_iş_Tbl_Kategori">
+    <End Role="Tbl_Kategori" Type="Self.Tbl_Kategori" Multiplicity="1" />
+    <End Role="Tbl_Günlük_iş" Type="Self.Tbl_Günlük_iş" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Kategori">
+        <PropertyRef Name="Kategori_ID" />
+      </Principal>
+      <Dependent Role="Tbl_Günlük_iş">
+        <PropertyRef Name="Kategori_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_iş_işlem_Tbl_Günlük_iş">
+    <End Role="Tbl_Günlük_iş" Type="Self.Tbl_Günlük_iş" Multiplicity="1" />
+    <End Role="Tbl_iş_işlem" Type="Self.Tbl_iş_işlem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Günlük_iş">
+        <PropertyRef Name="iş_ID" />
+      </Principal>
+      <Dependent Role="Tbl_iş_işlem">
+        <PropertyRef Name="iş_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_iş_işlem_Tbl_Kullanici">
+    <End Role="Tbl_Kullanici" Type="Self.Tbl_Kullanici" Multiplicity="1" />
+    <End Role="Tbl_iş_işlem" Type="Self.Tbl_iş_işlem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Kullanici">
+        <PropertyRef Name="Kullanici_ID" />
+      </Principal>
+      <Dependent Role="Tbl_iş_işlem">
+        <PropertyRef Name="Kullanici_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Proje1ModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Günlük_iş" EntityType="Self.Tbl_Günlük_iş" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_iş_aktivite" EntityType="Self.Tbl_iş_aktivite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_iş_Durumu" EntityType="Self.Tbl_iş_Durumu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Kategori" EntityType="Self.Tbl_Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_Kullanici" EntityType="Self.Tbl_Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tbl_iş_işlem" EntityType="Self.Tbl_iş_işlem" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Tbl_iş_işlem].[Kullanici_ID] AS [Kullanici_ID], 
+    [Tbl_iş_işlem].[iş_ID] AS [iş_ID], 
+    [Tbl_iş_işlem].[işlem] AS [işlem]
+    FROM [dbo].[Tbl_iş_işlem] AS [Tbl_iş_işlem]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Tbl_Günlük_iş_Tbl_iş_aktivite" Association="Self.FK_Tbl_Günlük_iş_Tbl_iş_aktivite">
+      <End Role="Tbl_iş_aktivite" EntitySet="Tbl_iş_aktivite" />
+      <End Role="Tbl_Günlük_iş" EntitySet="Tbl_Günlük_iş" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Günlük_iş_Tbl_iş_Durumu" Association="Self.FK_Tbl_Günlük_iş_Tbl_iş_Durumu">
+      <End Role="Tbl_iş_Durumu" EntitySet="Tbl_iş_Durumu" />
+      <End Role="Tbl_Günlük_iş" EntitySet="Tbl_Günlük_iş" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Günlük_iş_Tbl_Kategori" Association="Self.FK_Tbl_Günlük_iş_Tbl_Kategori">
+      <End Role="Tbl_Kategori" EntitySet="Tbl_Kategori" />
+      <End Role="Tbl_Günlük_iş" EntitySet="Tbl_Günlük_iş" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_iş_işlem_Tbl_Günlük_iş" Association="Self.FK_Tbl_iş_işlem_Tbl_Günlük_iş">
+      <End Role="Tbl_Günlük_iş" EntitySet="Tbl_Günlük_iş" />
+      <End Role="Tbl_iş_işlem" EntitySet="Tbl_iş_işlem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_iş_işlem_Tbl_Kullanici" Association="Self.FK_Tbl_iş_işlem_Tbl_Kullanici">
+      <End Role="Tbl_Kullanici" EntitySet="Tbl_Kullanici" />
+      <End Role="Tbl_iş_işlem" EntitySet="Tbl_iş_işlem" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
