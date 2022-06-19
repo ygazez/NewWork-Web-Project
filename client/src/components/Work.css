@@ -5,3 +5,19 @@
 .badge {
   color: blueviolet;
 }
+.row {
+  display: flex;
+  direction: row;
+}
+.col-lg-3 {
+  margin: 20px;
+}
+a:link {
+  color: rgb(10, 214, 10);
+}
+a:visited {
+  color: rgb(10, 214, 10);
+}
+a:hover {
+  color: red;
+}

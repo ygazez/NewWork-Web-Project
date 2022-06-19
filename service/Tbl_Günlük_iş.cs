@@ -23,6 +23,7 @@ namespace NEWWORK
         public int iş_ID { get; set; }
         public int Kategori_ID { get; set; }
         public string Konum { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.Column(TypeName = "datetime2")]
         public System.DateTime Tarih { get; set; }
         public int iş_gün_sayısı { get; set; }
         public int iş_aktivite_ID { get; set; }

@@ -1,16 +1,24 @@
 import React from "react";
-import SearchBar from "./SearchBar";
-import Worklist from "./Worklist";
-import axios from "axios";
-import AddWork from "./AddWork";
-import EditWork from "./EditWork";
-//import { render } from "react-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import About from "./pages/about";
+import AddWork from "./components/AddWork";
+import Contact from "./pages/contact";
+import SignUp from "./pages/signup";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import SearchBar from "./components/SearchBar";
+import Worklist from "./components/Worklist";
+import axios from "./api/axios";
 
 class App extends React.Component {
   state = {
     works: [],
     searchQuery: "",
+  };
+  refreshPage = () => {
+    window.location.reload();
   };
 
   componentDidMount() {
@@ -74,6 +82,7 @@ class App extends React.Component {
 
     return (
       <Router>
+        <Navbar />
         <div className="container">
           <Switch>
             <Route
@@ -82,7 +91,7 @@ class App extends React.Component {
               render={() => (
                 <React.Fragment>
                   <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-lg-4">
                       <SearchBar searchWorkProp={this.searchWork} />
                     </div>
                   </div>
@@ -94,23 +103,22 @@ class App extends React.Component {
                 </React.Fragment>
               )}
             ></Route>
+
             <Route
-              path="/add"
+              path="/Add"
               render={({ history }) => (
                 <AddWork
                   onAddWork={(work) => {
                     this.addWork(work);
-
                     history.push("/");
                   }}
                 />
               )}
             ></Route>
-
             <Route
               path="/edit/:id"
               render={(props) => (
-                <EditWork
+                <AddWork
                   {...props}
                   onEditWork={(iş_ID, work) => {
                     this.editWork(iş_ID, work);
@@ -118,6 +126,18 @@ class App extends React.Component {
                 />
               )}
             ></Route>
+
+            <Route path="/contact-us" component={Contact} />
+
+            <Route path="/sign-up" component={SignUp} />
+            <Route path="/Login" component={Login} />
+            <Route path="/Register" component={Register} />
+            <Route path="/about" component={About} />
+
+            <main className="App">
+              <Register />
+              <Login />
+            </main>
           </Switch>
         </div>
       </Router>

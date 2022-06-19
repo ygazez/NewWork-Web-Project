@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Work.css";
-import { Link } from "react-router-dom";
-import "./App";
+import { Link, useHistory } from "react-router-dom";
 
 const Worklist = (props) => {
   // function handleClick(event){
@@ -25,6 +24,8 @@ const Worklist = (props) => {
     }
     return imgUrl;
   };
+  const history = useHistory();
+
   return (
     <div className="row">
       {props.works.map((u, i) => (
@@ -51,15 +52,17 @@ const Worklist = (props) => {
                   onClick={(event) => props.deleteWorkProp(u.iş_ID)}
                   className="btn btn-md btn-outline-danger"
                 >
-                  Delete
+                  Sil
                 </button>
-                <Link
-                  type="button"
-                  className="btn btn-md btn-outline-primary"
-                  to={`Edit/${u.iş_ID}`}
-                >
-                  Edit{" "}
-                </Link>
+                <button>
+                  <Link
+                    type="button"
+                    className="btn btn-md btn-outline-danger"
+                    to={`Edit/${u.iş_ID}`}
+                  >
+                    Düzenle
+                  </Link>
+                </button>
                 <h2>
                   <span className="badge badge-info">
                     {u.iş_gün_sayısı}

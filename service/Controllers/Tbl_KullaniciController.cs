@@ -45,8 +45,8 @@ namespace NEWWORK.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Kullanici_ID,Ad,Soyad,Telefon,Mail,şifre")] Tbl_Kullanici tbl_Kullanici)
+        
+        public ActionResult Create( Tbl_Kullanici tbl_Kullanici)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace NEWWORK.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult Edit([Bind(Include = "Kullanici_ID,Ad,Soyad,Telefon,Mail,şifre")] Tbl_Kullanici tbl_Kullanici)
         {
             if (ModelState.IsValid)
@@ -106,7 +106,7 @@ namespace NEWWORK.Controllers
 
         // POST: Tbl_Kullanici/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult DeleteConfirmed(int id)
         {
             Tbl_Kullanici tbl_Kullanici = db.Tbl_Kullanici.Find(id);
