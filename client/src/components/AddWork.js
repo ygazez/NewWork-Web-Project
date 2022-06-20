@@ -97,7 +97,7 @@ class AddWork extends React.Component {
                 disabled
               />
             </div>
-            <Box sx={{ minWidth: 300, minHeight: 80 }}>
+            <Box sx={{ minWidth: 300, minHeight: 60 }}>
               <InputLabel id="demo-simple-select-label">Kategori</InputLabel>
               <FormControl fullWidth margin="normal">
                 <Select

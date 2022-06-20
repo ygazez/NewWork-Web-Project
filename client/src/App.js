@@ -17,9 +17,6 @@ class App extends React.Component {
     works: [],
     searchQuery: "",
   };
-  refreshPage = () => {
-    window.location.reload();
-  };
 
   componentDidMount() {
     this.getWorks();
@@ -128,7 +125,6 @@ class App extends React.Component {
             ></Route>
 
             <Route path="/contact-us" component={Contact} />
-
             <Route path="/sign-up" component={SignUp} />
             <Route path="/Login" component={Login} />
             <Route path="/Register" component={Register} />
